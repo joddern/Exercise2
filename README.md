@@ -21,6 +21,13 @@ Exactly how you do communication for the project is up to you, so if you want to
 
 ---
 
+*If you are doing this exercise in Erlang or Elixir, you will want to skip the part about TCP, and learn how to use Nodes instead. But UDP might still be useful, in order to make something that can auto-detect the IP addresses of the other nodes on the network. Some links to get you started:*
+ - [*Distributed Erlang*](http://erlang.org/doc/reference_manual/distributed.html)
+ - [*Elixir School on OTP Distribution*](https://elixirschool.com/en/lessons/advanced/otp_distribution)
+ - [*Elixir documentation on `Node`*](https://hexdocs.pm/elixir/Node.html). 
+
+---
+
 Since network programming requires that both sending and receiving works at the same time, it becomes quite difficult to get things right when starting out. This exercise comes with a pre-made network server, so that you can incrementally create one new thing at a time. On the lab, this networking server is run on the machine near the student assistants (so you do not need to do anything to set it up), and also prints out a full log of everything. If you are working from home, you may want to run such a server yourself, and [instructions to do so are found in this document](./working-from-home.md).
 
 Practical tips:
