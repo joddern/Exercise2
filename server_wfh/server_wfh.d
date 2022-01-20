@@ -190,11 +190,12 @@ version(Windows){
     import core.sys.windows.wincon;
 
     enum Color : ushort {
-        tcp_info    = FOREGROUND_RED  | FOREGROUND_GREEN,
-        tcp_data    = FOREGROUND_RED  | FOREGROUND_GREEN | FOREGROUND_INTENSITY,
-        udp_info    = FOREGROUND_BLUE | FOREGROUND_GREEN,
-        udp_data    = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY,
+        tcp_info    = FOREGROUND_RED | FOREGROUND_BLUE,
+        tcp_data    = FOREGROUND_RED | FOREGROUND_GREEN,
+        udp_info    = FOREGROUND_GREEN,
+        udp_data    = FOREGROUND_GREEN | FOREGROUND_BLUE,
     }
+    enum BACKGROUND_MASK = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY;
 
     void writefcln(Char, A...)(Color c, in Char[] fmt, A args){
         synchronized(consoleMtx){
@@ -204,7 +205,10 @@ version(Windows){
             GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
             scope(exit) SetConsoleTextAttribute(hConsole, consoleInfo.wAttributes);
 
-            SetConsoleTextAttribute(hConsole, c);
+            SetConsoleTextAttribute(hConsole, 
+                c | 
+                (consoleInfo.wAttributes & BACKGROUND_MASK) | 
+                ((consoleInfo.wAttributes & BACKGROUND_INTENSITY) ? 0 : FOREGROUND_INTENSITY));
             writefln(fmt, args);
         }
     }
