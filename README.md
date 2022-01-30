@@ -1,4 +1,4 @@
-Exercise 2 : Networking essentials
+Exercise 2 : Networking Essentials
 ==================================
 
 This exercise serves three goals:
