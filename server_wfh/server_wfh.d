@@ -178,6 +178,7 @@ void UDPAnnouncer(string localIP, string bcastIP, const ushort port){
     sendSock.setOption(SocketOptionLevel.SOCKET, SocketOption.REUSEADDR, 1);
 
     while(1){
+        // Changing this one ever so sligthly to see:
         auto r = sendSock.sendTo(cast(ubyte[])format("Hello from UDP server at %s!", localIP), bcastAddr);
         Thread.sleep(1.seconds);
     }
